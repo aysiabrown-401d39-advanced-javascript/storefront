@@ -6,7 +6,7 @@
 - an e-commerce store front using React, Redux & Materials-UI
 
 ### Resources
-- [Code Sandbox]()
+- [Code Sandbox](https://codesandbox.io/s/dawn-darkness-497pt)
 
 ### Setup
 - if running on your local machine, start by running `npm i` within your local repository 
