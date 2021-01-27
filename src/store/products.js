@@ -12,12 +12,63 @@ let initialState = {products: [
 ]};
 
 
+export const updateCount = (item) => {
+    return {
+        type: 'DECREASE COUNT',
+        payload: item, 
+    }
+}
 
+export const addCountBack = (item) => {
+    return {
+        type: 'ADD COUNT',
+        payload: item,
+    }
+}
+
+// fix logic for changing cart quantity 
+export const changeInventory = (count, item) => {
+    item.count = parseInt(count);
+    console.log('count', item.count);
+    return {
+        type: 'QUANTITY',
+        payload: {count, item},
+    }
+}
     
 export default (state=initialState, action) => {
     let {type, payload} = action;
     switch(type) {
-        default:
+        case 'DECREASE COUNT':
+            let products = state.products.map(game => {
+                if(game.title == payload.title) {
+                    game.count--;
+                }
+                return game;
+            })
+            return {...state, products};
+
+            case 'ADD COUNT':
+                let product = state.products.map(game => {
+                    if(game.title == payload.title) {
+                        game.count += payload.count; 
+                    }
+                    return game;
+                })
+                return{...state, product};
+                
+            // fix logic for changing cart quantity    
+            case 'QUANTITY':
+                let listing = state.products.map(game =>{
+                    if(game.title == payload.item.title) {
+                        game.count -= payload.count;
+                    }
+                    return game;
+                })
+                return{...state, listing};
+        
+        
+            default:
             return state;
     }
 }

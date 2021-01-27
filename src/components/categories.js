@@ -18,27 +18,16 @@ function Categories(props) {
     const handleClick = (e, val) => {
         e.preventDefault();
         props.change(val);
-        console.log('onClick', props.current);
+        console.log('category', props.categories.categories);
     }
 
     return (
         <>
         <Typography variant='caption'>BROWSE CATEGORIES</Typography>
             <Breadcrumbs aria-label="breadcrumb">
-                <Link  color="inherit" href="/" onClick={(e) => handleClick(e,'VIDEOGAMES')}>
-                    Videogames 
-                </Link>
-                <Link color="inherit" href="/" onClick={(e) => handleClick(e,'BOARDGAMES')}>
-                    Boardgames
-                </Link>
-                <Link
-                    color="textPrimary"
-                    href="/"
-                    onClick={(e) => handleClick(e,'ALL')}
-                    aria-current="page"
-                >
-                    All
-                </Link>
+            {props.categories.categories.map(category => {
+                return(<Link color='inherit' href='/' onClick={(e) => handleClick(e, category)}>{category}</Link>)
+            })}
             </Breadcrumbs>
             <Typography variant='h1'>{props.current.active}</Typography>
             </>

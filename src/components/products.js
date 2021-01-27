@@ -3,9 +3,20 @@ import {connect} from 'react-redux';
 import Card from '@material-ui/core/Card'
 import { CardActionArea, CardMedia, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button'
+import {addToCart} from '../store/cart'
+import {updateCount} from '../store/products'
+import Game from '../store/objects/games'
 
 function Products (props) {
-    console.log(props.inventory.products[0].title);
+    
+    const handleAddItem = (e, item) => {
+        e.preventDefault();
+        let game = new Game(item.category, item.title, item.price, item.img, 1);
+        props.addToCart(game);
+        props.updateCount(item);
+    }
+
+
     return(
         <>
          {
@@ -21,13 +32,13 @@ function Products (props) {
                             component='img'
                             image={item.img}
                             />
-                            {item.count == 0 ?
+                            {item.count <= 0 ?
                                 (<Typography variant='body1'>SOLD OUT! Restocking soon.</Typography>)
                             :
                                 (<>
                                 <Typography variant='body1'>Price: {item.price}</Typography>
                                 <Typography variant='body1'>Inventory Count: {item.count}</Typography>
-                                <Button variant='contained' color='secondary'>Add To Cart</Button>
+                                <Button onClick={e => handleAddItem(e, item)} variant='contained' color='secondary'>Add To Cart</Button>
                                 </>)
                             }
                         </CardActionArea>
@@ -43,7 +54,10 @@ function Products (props) {
 const mapStateToProps = state => ({
     inventory: state.products,
     current: state.current,
+    cart: state.cart,
 })
 
+const mapDispatchToProps = {addToCart,updateCount}
 
-export default connect(mapStateToProps)(Products);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
