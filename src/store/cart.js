@@ -2,28 +2,33 @@ import Game from './objects/games'
  
 let initialState = {cart: []};
 
-export const addToCart = (game) => {
-    console.log('in addToCart')
+export const addToCart = (item) => {
     return {
         type: 'ADD',
-        payload: game,
+        payload: item,
     }
 }
 
-export const removeFromCart = (game) => {
-    console.log('game', game);
+export const removeFromCart = (item) => {
     return {
         type: 'REMOVE',
-        payload: game,
+        payload: item,
     }
 }
 
 
-// fix logic for updating cart quantity
-export const updateQuantity = (count, item) => {
+export const plusQuantity = (item) => {
     return {
-        type: 'QUANTITY',
-        payload: {count, item},
+        type: 'PLUS',
+        payload: item,
+    }
+
+}
+
+export const minusQuantity = (item) => {
+    return {
+        type: 'MINUS',
+        payload: item,
     }
 }
 
@@ -46,17 +51,30 @@ export default (state=initialState, action) => {
             return {...state};
 
         case 'REMOVE':
-            let cart = state.cart.filter(game => game.title != payload.title);
+            let cart = state.cart.filter(item => item.title != payload.title);
             return {...state, cart};
 
-        // fix logic for updating cart quantity    
-        case 'QUANTITY': 
-            let quantity = state.cart.map(item => {
-                if(item.title == payload.item.title) {
-                    item.count = payload.count;
+
+        case 'PLUS':
+            let plus = state.cart.map(item => {
+                if(item.title === payload.title) {
+                    item.count++;
                 }
+                return item;
             })
-            return{...state, quantity};
+            return {...state, plus};
+
+
+        case 'MINUS':
+            let minus = state.cart.map(item => {
+                if(item.title === payload.title) {
+                    item.count--;
+                    console.log('minus', item.count);
+                }
+                return item;
+            })
+
+            return {...state, minus};
 
         default:
             return state;
