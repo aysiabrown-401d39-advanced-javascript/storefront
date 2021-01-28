@@ -7,6 +7,9 @@
 
 ### Resources
 - [Code Sandbox](https://codesandbox.io/s/dawn-darkness-497pt)
+- [API](https://aysiab-basic-api-server.herokuapp.com/products)
+- [Images](https://unsplash.com/@aysiab/likes)
+- [Icons](https://icons8.com/)
 
 ### Setup
 - if running on your local machine, start by running `npm i` within your local repository 
