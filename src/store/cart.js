@@ -40,7 +40,7 @@ export default (state=initialState, action) => {
         case 'ADD':
             let contains;
             for(var item of state.cart) {
-                if(item.title == payload.title) {
+                if(item.title === payload.title) {
                     item.count += 1;
                     contains = true;
                 }
@@ -51,7 +51,7 @@ export default (state=initialState, action) => {
             return {...state};
 
         case 'REMOVE':
-            let cart = state.cart.filter(item => item.title != payload.title);
+            let cart = state.cart.filter(item => item.title !== payload.title);
             return {...state, cart};
 
 
