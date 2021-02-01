@@ -7,7 +7,7 @@
 
 ### Resources
 - [Code Sandbox](https://codesandbox.io/s/dawn-darkness-497pt)
-- [API](https://aysiab-basic-api-server.herokuapp.com/products)
+- [API](https://aysiab-auth-api.herokuapp.com/api/v1/products)
 - [Images](https://unsplash.com/@aysiab/likes)
 - [Icons](https://icons8.com/)
 

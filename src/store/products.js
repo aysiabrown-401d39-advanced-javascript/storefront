@@ -14,13 +14,13 @@
 import superagent from 'superagent';
 let initialState = { products: [] }
 
-let url = 'https://aysiab-basic-api-server.herokuapp.com/products';
+let url = 'https://aysiab-auth-api.herokuapp.com/api/v1/products';
 
 
 export const get = () => dispatch => {
     console.log('url', url);
     return superagent
-      .get('https://aysiab-basic-api-server.herokuapp.com/products')
+      .get(url)
       .then(response => {
         dispatch(getAction(JSON.parse(response.text)))
       })
